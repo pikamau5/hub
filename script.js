@@ -44,7 +44,6 @@ function addTask(task) {
  
   deleteButton.addEventListener('click', function() {
       todoList.removeChild(listItem);
-      saveTasksToLocalStorage();
   });
 
   editButton.addEventListener('click', function() {
