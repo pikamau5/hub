@@ -1,78 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Your HTML content here -->
-    
-    <script>
-        // Your JavaScript code goes here
-        // Paste your jsfile.js content here
-        
-        // import { escapeHtml } from './escape.js';
-        // import template from './template.html';
-        
-        const escapeHtml = (unsafe) => {
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        };
-        
-        const defaultData = { todos: [] };
-        
-        const setCache = (key, data) => EXAMPLE_TODOS.put(key, data);
-        const getCache = (key) => EXAMPLE_TODOS.get(key);
-        
-        async function getTodos(request) {
-            const ip = request.headers.get('CF-Connecting-IP');
-            const cacheKey = `data-${ip}`;
-            let data;
-            const cache = await getCache(cacheKey);
-            if (!cache) {
-                await setCache(cacheKey, JSON.stringify(defaultData));
-                data = defaultData;
-            } else {
-                data = JSON.parse(cache);
-            }
-        
-            const body = template.replace(
-                '$TODOS',
-                JSON.stringify(
-                    data.todos?.map((todo) => ({
-                        id: escapeHtml(todo.id),
-                        name: escapeHtml(todo.name),
-                        completed: !!todo.completed,
-                    })) ?? []
-                )
-            );
-            return new Response(body, {
-                headers: { 'Content-Type': 'text/html' },
-            });
-        }
-        
-        async function updateTodos(request) {
-            const body = await request.text();
-            const ip = request.headers.get('CF-Connecting-IP');
-            const cacheKey = `data-${ip}`;
-            try {
-                JSON.parse(body);
-                await setCache(cacheKey, body);
-                return new Response(body, { status: 200 });
-            } catch (err) {
-                return new Response(err, { status: 500 });
-            }
-        }
-        
-        if (request.method === 'PUT') {
-            return updateTodos(request);
-        }
-        return getTodos(request);
-    </script>
+  <div id="todo-app">
+      <h1>My To-Do List</h1>
+      <form id="todo-form">
+          <input type="text" id="todo-input" placeholder="Add a new task...">
+          <button type="submit">Add Task</button>
+      </form>
+      <ul id="todo-list">
+          <!-- Tasks will be added here -->
+      </ul>
+    </div>
+  <script src="script.js"></script>
 </body>
 </html>
