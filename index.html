@@ -1,31 +1,13 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Submission</title>
+    <title>My Page</title>
+    <!-- Include your JavaScript file -->
+    <script src="jsfile.js" defer></script>
 </head>
 <body>
-    <h1>Form Submission</h1>
-    <form id="form">
-        <label for="textInput">Enter Text:</label><br>
-        <input type="text" id="textInput" name="textInput"><br><br>
-        <button type="submit">Submit</button>
-    </form>
-
-    <script>
-        document.getElementById('form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const response = await fetch('/submit', {
-                method: 'POST',
-                body: formData
-            });
-            const result = await response.text();
-            alert(result);
-        });
-    </script>
+    <!-- Your HTML content here -->
 </body>
 </html>
