@@ -24,8 +24,8 @@ function addTask(task) {
   checkBox.setAttribute('type', 'checkbox');
   listItem.appendChild(checkBox);
 
-  const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'Delete';
+  const Button = document.createElement('button');
+  Button.textContent = 'Delete';
   listItem.appendChild(deleteButton);
 
   todoList.appendChild(listItem);
@@ -44,6 +44,7 @@ function addTask(task) {
  
   deleteButton.addEventListener('click', function() {
       todoList.removeChild(listItem);
+      saveTasksToLocalStorage();
   });
 
   editButton.addEventListener('click', function() {
